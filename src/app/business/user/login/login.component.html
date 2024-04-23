@@ -1,0 +1,13 @@
+<ng-container>
+    <mat-card>
+        <mat-card-content>
+            <form [formGroup]="loginForm">
+                <div class="example-container">
+                    <app-cus-mat-input [formG]="loginForm" formCN="email" label="email"></app-cus-mat-input>
+                    <br>
+                    <app-cus-mat-input [formG]="loginForm" formCN="password" label="password" [showEye]="true"></app-cus-mat-input>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</ng-container>
