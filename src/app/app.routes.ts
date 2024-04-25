@@ -15,6 +15,7 @@ export const routes: Routes = [
         ]
     },
     {path: 'login', component: LoginComponent},
-    {path: "**", redirectTo: '/uploader/testing'},
+    {path: 'signup', component: LoginComponent},
+    {path: "**", redirectTo: '/login'},
 
 ];

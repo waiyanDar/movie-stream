@@ -1,13 +1,41 @@
-<ng-container>
+<div class="container my-5 w-25">
+  <div class="card rounded shadow">
+    <div class="card-header text-center">
+      @if (loginOrNot){
+      <h4>Sign in</h4>
+      }@else{
+      <h4>Sign up</h4>
+      }
+    </div>
     <mat-card>
-        <mat-card-content>
-            <form [formGroup]="loginForm">
-                <div class="example-container">
-                    <app-cus-mat-input [formG]="loginForm" formCN="email" label="email"></app-cus-mat-input>
-                    <br>
-                    <app-cus-mat-input [formG]="loginForm" formCN="password" label="password" [showEye]="true"></app-cus-mat-input>
-                </div>
-            </form>
-        </mat-card-content>
+      <mat-card-content class="d-flex flex-column align-items-center">
+        <form [formGroup]="signForm" class="d-flex flex-column align-items-center">
+          <div class="example-container">
+            @if (!loginOrNot) {
+              <app-cus-mat-input [formG]="signForm" formCN="name" label="Name" [makeFirstCharUpper]="true" class="w-100"></app-cus-mat-input>
+            }
+            <app-cus-mat-input [formG]="signForm" formCN="email" label="Email" class="w-100"></app-cus-mat-input>
+            <br>
+            <app-cus-mat-input [formG]="signForm" formCN="password" label="Password" [showEye]="true"
+              class="w-100"></app-cus-mat-input>
+            @if (!loginOrNot) {
+              <app-cus-mat-input (blurEvent)="checkDuplication($event)" [formG]="signForm" formCN="confirmPassword" label="Confirm Password" [showEye]="true"
+              class="w-100"></app-cus-mat-input>
+            }@else{
+              <button mat-button color="success" class="w-100">forgot password</button>
+            }
+            <br>
+          </div>
+          <button mat-button color="success" class="w-100" (click)="signInOrUp()">
+            {{ loginOrNot ? 'Sign In' : 'Sign Up' }}
+          </button>
+          <small>If you {{ loginOrNot ? "don't" : "already" }} have an account, you can 
+            <a mat-button routerLink="{{ loginOrNot ? '/signup' : '/signin' }}">
+              {{ loginOrNot ? 'sign up' : 'sign in' }}
+            </a>
+          </small>
+        </form>
+      </mat-card-content>
     </mat-card>
-</ng-container>
+  </div>
+</div>

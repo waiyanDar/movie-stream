@@ -1,3 +1,25 @@
-.example-container mat-form-field + mat-form-field {
-    margin-left: 8px;
-  }
+.example-container mat-form-field+mat-form-field {
+  margin-left: 8px;
+}
+
+.example-container {
+  width: 100%;
+  /* Make inputs full width */
+}
+
+button {
+  max-width: 285px;
+  /* Set max-width to match input */
+}
+
+.mat-button.mat-success{
+    color: yellow !important;
+}
+.mat-button.mat-success:hover{
+  background-color: red !important;
+}
+
+.mat-forgotPsw {
+  background-color: green($color: #000000);
+  color: #fff;
+}

@@ -1,18 +1,22 @@
 <ng-container [formGroup]="formG">
     <mat-form-field>
         <mat-label>{{label}}</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" [formControlName]="formCN" (blur)="onBlur()">
+        <input matInput [type]="(!showEye) ? 'text' : (showEye && hide) ? 'password' : 'text'" [formControlName]="formCN" 
+        (blur)="onBlur()" [value]="makeFirstCharUpper ? (formG.get(formCN)?.value | firstCapital) : formG.get(formCN)?.value"> 
         @if (showEye === true){
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
         }
         @if (formG.get(formCN)?.hasError('required')) {
-        <mat-error>Please enter {{label}}</mat-error>
+            <mat-error>Please enter {{label}}</mat-error>
         }
         @if (formG.get(formCN)?.hasError('email')) {
-        <mat-error>Invalid email format</mat-error>
+            <mat-error>Invalid email format</mat-error>
+        }
+        @if (formG.get(formCN)?.hasError('pswNotSame')) {
+            <mat-error>Confirm password and password must same</mat-error>
         }
     </mat-form-field>
 </ng-container>
