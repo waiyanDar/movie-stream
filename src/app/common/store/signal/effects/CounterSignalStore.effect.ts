@@ -15,7 +15,6 @@ export class CounterSignalStoreEffect{
         effect(() =>{
             const state = getState(this.counterStore);
             if (state.count === -2){
-                // this.counterStore.testOne();
                 this.commonService.loadCount().pipe(take(1)).subscribe(count => {
                     console.log(count.count);
                     this.counterStore.setCounter(count.count);

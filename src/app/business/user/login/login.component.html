@@ -1,4 +1,4 @@
-<div class="container my-5 w-25">
+<!-- <div class="container my-5 w-25">
   <div class="card rounded shadow">
     <div class="card-header text-center">
       @if (loginOrNot){
@@ -37,5 +37,60 @@
         </form>
       </mat-card-content>
     </mat-card>
+  </div>
+</div> -->
+
+<div class="container my-5 w-25">
+  <div class="card rounded shadow">
+    <div class="card-header text-center">
+      <h2>Sign Up</h2>
+      <em>Hello! Welcome to the family.</em>
+      <form [formGroup]="signForm">
+        <div #panes [@paneChange]="{
+            value: activePane(),
+            params: {
+              startHeight: panes.clientHeight
+            }
+          }" class="panes">
+          @switch(activePane()) {
+          @case(0) {
+          <div class="pane">
+            <app-cus-input [formGp]="signForm" formCtrlName="name" label="Name" placeholder=""></app-cus-input>
+            <app-cus-input [formGp]="signForm" formCtrlName="email" label="Email" placeholder=""></app-cus-input>
+          </div>
+          }
+          @case(1) {
+          <div class="pane">
+            <app-cus-input [formGp]="signForm" formCtrlName="password" label="Password" placeholder=""></app-cus-input>
+            <app-cus-input [formGp]="signForm" formCtrlName="confirmPassword" label="Confirm Password"
+              placeholder=""></app-cus-input>
+            <footer>
+              <p>Password must contain:</p>
+              <ul>
+                <li>At least 8 characters</li>
+                <li>At least 1 lowercase character</li>
+                <li>At least 1 uppercase character</li>
+                <li>At leaset 1 number or special character</li>
+              </ul>
+            </footer>
+          </div>
+          }
+          }
+        </div>
+
+        @if(activePane() === 0){
+        <button (click)="setActiveStep()" class="continue">
+          Continue
+        </button>
+        }@else{
+        <!-- <button (click)="setActiveStep()" class="back" class="visible" title="Previous Step">
+            <span class="visually-hidden">Previous Step</span>
+          </button> -->
+        <button (click)="setActiveStep()" class="continue" title="Previous Step">
+          <span>Previous Step</span>
+        </button>
+        }
+      </form>
+    </div>
   </div>
 </div>
