@@ -11,7 +11,7 @@ import { animate, group, query, state, style, transition, trigger } from '@angul
 import { MatInputModule } from '@angular/material/input';
 import { NgIf } from '@angular/common';
 import { CusInputComponent } from '../../../common/widgets/cus-input/cus-input.component';
-import { slideInOutAnimation, testAnimation, testAnimation1 } from '../../../common/animations/animation';
+import { buttonAnimation, paneChangeAnimation, slideInOutAnimation, testAnimation, testAnimation1, translateAnimation } from '../../../common/animations/animation';
 
 @Component({
   selector: 'app-login',
@@ -26,12 +26,13 @@ import { slideInOutAnimation, testAnimation, testAnimation1 } from '../../../com
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   animations: [
-    testAnimation, testAnimation1
+    translateAnimation, paneChangeAnimation, buttonAnimation
   ]
 })
 export class LoginComponent implements OnInit {
 
-  signForm !: FormGroup;
+  nameAndEmailForm !: FormGroup;
+  passwordForm !: FormGroup;
   errorMessage = '';
 
   constructor(
@@ -50,9 +51,11 @@ export class LoginComponent implements OnInit {
 
   prepareForm() {
     // if (!this.loginOrNot) {
-      this.signForm =  this.fb.group({
+      this.nameAndEmailForm =  this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         name: ['', [Validators.required]],
+      });
+      this.passwordForm = this.fb.group({
         password: ['', [Validators.required]],
         confirmPassword: ['', [Validators.required]]
       });
@@ -62,19 +65,18 @@ export class LoginComponent implements OnInit {
     //     password: ['', [Validators.required]]
     //   });
     // }
-    console.log(this.signForm);
     
   }
 
   checkDuplication(event: any){
-    mustDuplicate('password', event, this.signForm);
+    mustDuplicate('password', event, this.nameAndEmailForm);
 }
 
 
   signInOrUp(){
-    if (this.signForm.valid){
+    if (this.nameAndEmailForm.valid){
       if (this.loginOrNot){
-        const tempLogIn = this.signForm.value;
+        const tempLogIn = this.nameAndEmailForm.value;
         let enc = this.encryptService.encryptAES(tempLogIn['email'])
         let dec = this.encryptService.decryptAES(enc);
 
@@ -82,10 +84,10 @@ export class LoginComponent implements OnInit {
         let decV2 = this.encryptService.decryptAESV2(encV2);
         
       }else{
-        const tempSignUp = this.signForm.value;        
+        const tempSignUp = this.nameAndEmailForm.value;        
       }
     }else{   
-      checkNestedControlAndMarkAsDirty(this.signForm);
+      checkNestedControlAndMarkAsDirty(this.nameAndEmailForm);
     }
   }
 
@@ -96,13 +98,19 @@ export class LoginComponent implements OnInit {
   // });
 
   setActiveStep() {
-    if (this.activePane() === 0 && this.signForm.get('name')?.valid && this.signForm.get('email')?.valid) {
+    if (this.activePane() === 0 && this.nameAndEmailForm.valid) {
       this.activePane.set(1);
-    }else if (this.activePane() === 1 && this.signForm.get('password')?.valid && this.signForm.get('confirmPassword')?.valid){
+    }else if (this.activePane() === 1 ){
       this.activePane.set(0);
-    }else{
-      checkNestedControlAndMarkAsDirty(this.signForm);
     }
-    
+      checkNestedControlAndMarkAsDirty(this.nameAndEmailForm);
+  }
+
+  setSignUpStep(){
+    if (this.passwordForm.valid){
+
+    }else{
+      checkNestedControlAndMarkAsDirty(this.passwordForm);
+    }
   }
 }

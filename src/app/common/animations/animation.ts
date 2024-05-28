@@ -54,3 +54,51 @@ export const testAnimation1 = trigger('paneChange', [
     ], { params: { startHeight: 0 } })
   ])
 ])
+
+export const buttonAnimation = trigger('buttonChange', [
+  state('initial', style({
+    opacity: 1,
+    transform: 'scale(1)'
+  })),
+  state('changed', style({
+    opacity: 0,
+    transform: 'scale(0.9)'
+  })),
+  transition('initial <=> changed', [
+    animate('1000ms ease-in-out')
+  ]),
+])
+
+export const paneChangeAnimation = trigger('paneChange', [
+  transition('* => *', [
+    query(':self', [
+      style({ height: '{{startHeight}}px' })
+    ], { optional: true }),
+    query(':enter', [
+      style({ opacity: 0, transform: 'scale({{startScale}})' })
+    ], { optional: true }),
+    query(':leave', [
+      style({ opacity: 1, transform: 'scale(1)' }),
+      animate('{{leaveDuration}} ease-in', style({ opacity: 0, transform: 'scale({{startScale}})' }))
+    ], { optional: true }),
+    group([
+      query(':self', [
+        animate('{{selfDuration}} ease-in', style({ height: '*' }))
+      ], { optional: true }),
+      query(':enter', [
+        animate('{{enterDuration}} ease-in', style({ opacity: 1, transform: 'scale(1)' }))
+      ], { optional: true })
+    ])
+  ], { params: { startHeight: 0, startScale: 0.9, leaveDuration: '0.2s', selfDuration: '0.2s', enterDuration: '0.2s' } })
+]);
+
+export const translateAnimation = trigger('translateAnimation', [
+  state('start', style({
+    transform: 'translateX(0)'
+  })),
+  state('end', style({
+    transform: 'translateX({{translateX}}%)'
+  }), { params: { translateX: -100 } }),
+  transition('start => end', animate('{{duration}}ms ease-in-out'), { params: { duration: 600 } }),
+  transition('end => start', animate('{{duration}}ms ease-in-out'), { params: { duration: 600 } })
+]);
