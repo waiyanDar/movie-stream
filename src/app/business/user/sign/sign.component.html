@@ -117,6 +117,11 @@
         </div>
       </div>
       }
+      @if (!isSignin){
+        <p>Do you have already account?<a routerLink="/signin">sign in</a></p>
+      }@else {
+        <p>You don't have account?<a routerLink="/signup">sign up</a></p>
+      }
     </div>
   </div>
 </div>

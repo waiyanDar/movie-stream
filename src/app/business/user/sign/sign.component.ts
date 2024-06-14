@@ -13,7 +13,6 @@ import { buttonAnimation, paneChangeAnimation, translateAnimation } from '../../
   imports: [
     MatCardModule,
     RouterLink,
-    FormsModule,
     ReactiveFormsModule,
     CusInputComponent
   ],
@@ -96,8 +95,7 @@ export class SignComponent implements OnInit {
       }else if (this.activePane() === 1 ){
         this.activePane.set(0);
       }else if (this.activePane() === 2 && this.isSignin){
-        checkNestedControlAndMarkAsDirty(this.emailAndPasswordForm);   
-        this.router.navigateByUrl('/home');     
+        this.emailAndPasswordForm.valid ? this.router.navigateByUrl('/home') : checkNestedControlAndMarkAsDirty(this.emailAndPasswordForm);     
       }
   }
 
