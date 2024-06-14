@@ -2,7 +2,7 @@
     <label>
         <span [ngClass]="{'text-danger': invalidAndTouched}" >{{label}}</span>
         <input [type]="type" [formControlName]="formCtrlName" [placeholder]="placeholder"
-        [ngClass]="{'invalid-border': invalidAndTouched}" />
+        [ngClass]="{'invalid-border': invalidAndTouched}" class="w-100"/>
     </label>
    @if(formGp.get(formCtrlName)?.touched){
     @if (formGp.get(formCtrlName)?.hasError('required')) {

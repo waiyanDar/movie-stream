@@ -43,28 +43,36 @@
 <div class="container my-5 w-25">
   <div class="card rounded shadow">
     <div class="card-header text-center">
+      @if(isSignin){
+      <h2>Sign In</h2>
+      }@else {
       <h2>Sign Up</h2>
-      <em>Hello! Welcome to the family.</em>
-      <!-- <form [formGroup]="signForm"> -->
-        <div #panes [@paneChange]="{
+      }
+      <p>Hello! Welcome
+        @if(isSignin){
+        <p>Back</p>
+        }to the family.</p>
+      <div #panes [@paneChange]="{
             value: activePane(),
             params: {
               startHeight: panes.clientHeight
             }
           }" class="panes">
-          @switch(activePane()) {
-          @case(0) {
-            <form [formGroup]="nameAndEmailForm">
+        @switch(activePane()) {
+        @case(0) {
+        <form [formGroup]="nameAndEmailForm">
           <div class="pane">
             <app-cus-input [formGp]="nameAndEmailForm" formCtrlName="name" label="Name" placeholder=""></app-cus-input>
-            <app-cus-input [formGp]="nameAndEmailForm" formCtrlName="email" label="Email" placeholder=""></app-cus-input>
+            <app-cus-input [formGp]="nameAndEmailForm" formCtrlName="email" label="Email"
+              placeholder=""></app-cus-input>
           </div>
-          </form>
-          }
-          @case(1) {
-            <form>
+        </form>
+        }
+        @case(1) {
+        <form>
           <div class="pane">
-            <app-cus-input [formGp]="passwordForm" formCtrlName="password" label="Password" placeholder=""></app-cus-input>
+            <app-cus-input [formGp]="passwordForm" formCtrlName="password" label="Password"
+              placeholder=""></app-cus-input>
             <app-cus-input [formGp]="passwordForm" formCtrlName="confirmPassword" label="Confirm Password"
               placeholder=""></app-cus-input>
             <footer>
@@ -77,29 +85,38 @@
               </ul>
             </footer>
           </div>
-          </form>
-          }
-          }
-        </div>
-
-        @if(activePane() === 0){
-        <button (click)="setActiveStep()" class="continue">
-          Continue
-        </button>
-        }@else{
-        <div class="row">
-          <div class="col-6">
-            <button (click)="setActiveStep()" class="continue">
-              <span>Previous Step</span>
-            </button>
-          </div>
-          <div class="col-6">
-            <button (click)="setSignUpStep()" class="continue">
-              <span>Sign Up</span>
-            </button>
-          </div>
-        </div>
+        </form>
         }
+        @case(2) {
+        <form [formGroup]="emailAndPasswordForm">
+          <div class="pane">
+            <app-cus-input [formGp]="emailAndPasswordForm" formCtrlName="email" label="Email"
+              placeholder=""></app-cus-input>
+            <app-cus-input [formGp]="emailAndPasswordForm" formCtrlName="password" label="Passwrod"
+              placeholder=""></app-cus-input>
+          </div>
+        </form>
+        }
+        }
+      </div>
+      @if(activePane() === 0 || activePane() === 2){
+      <button (click)="setActiveStep()" class="continue">
+        @if (isSignin) {<p>Sign In</p>}@else {<p>Continue</p>}
+      </button>
+      }@else if(activePane() === 1){
+      <div class="row">
+        <div class="col-6">
+          <button (click)="setActiveStep()" class="continue">
+            <span>Previous Step</span>
+          </button>
+        </div>
+        <div class="col-6">
+          <button (click)="setSignUpStep()" class="continue">
+            <span>Sign Up</span>
+          </button>
+        </div>
+      </div>
+      }
     </div>
   </div>
 </div>

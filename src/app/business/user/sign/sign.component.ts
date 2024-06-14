@@ -1,17 +1,11 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Validators, ReactiveFormsModule, FormGroup, NonNullableFormBuilder, FormControl, FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import { CusMatInputComponent } from '../../../common/widgets/cus-mat-input/cus-mat-input.component';
-import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
 import { checkNestedControlAndMarkAsDirty, mustDuplicate } from '../../../common/functions/common.funtion';
-import { take } from 'rxjs';
 import { EncryptDecrpytService } from '../../../common/services/encrypt.decrypt.service';
-import { animate, group, query, state, style, transition, trigger } from '@angular/animations';
-import { MatInputModule } from '@angular/material/input';
-import { NgIf } from '@angular/common';
 import { CusInputComponent } from '../../../common/widgets/cus-input/cus-input.component';
-import { buttonAnimation, paneChangeAnimation, slideInOutAnimation, testAnimation, testAnimation1, translateAnimation } from '../../../common/animations/animation';
+import { buttonAnimation, paneChangeAnimation, translateAnimation } from '../../../common/animations/animation';
 
 @Component({
   selector: 'app-login',
@@ -23,17 +17,20 @@ import { buttonAnimation, paneChangeAnimation, slideInOutAnimation, testAnimatio
     ReactiveFormsModule,
     CusInputComponent
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  templateUrl: './sign.component.html',
+  styleUrl: './sign.component.scss',
   animations: [
     translateAnimation, paneChangeAnimation, buttonAnimation
   ]
 })
-export class LoginComponent implements OnInit {
+export class SignComponent implements OnInit {
 
   nameAndEmailForm !: FormGroup;
   passwordForm !: FormGroup;
+  emailAndPasswordForm !: FormGroup;
   errorMessage = '';
+
+  protected activePane = signal(0);
 
   constructor(
     private fb: NonNullableFormBuilder,
@@ -43,14 +40,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.prepareForm();
+    this.isSignin ? this.activePane.set(2) : this.activePane.set(0);
   }
 
-  get loginOrNot() {
-    return this.router.url.includes('login');
+  get isSignin() {
+    return this.router.url.includes('signin');
   }
 
   prepareForm() {
-    // if (!this.loginOrNot) {
+    if (!this.isSignin) {
       this.nameAndEmailForm =  this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         name: ['', [Validators.required]],
@@ -59,12 +57,12 @@ export class LoginComponent implements OnInit {
         password: ['', [Validators.required]],
         confirmPassword: ['', [Validators.required]]
       });
-    // } else {
-    //   this.signForm = this.fb.group({
-    //     email: ['', [Validators.required, Validators.email]],
-    //     password: ['', [Validators.required]]
-    //   });
-    // }
+    } else {
+      this.emailAndPasswordForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]]
+      });      
+    }
     
   }
 
@@ -75,7 +73,7 @@ export class LoginComponent implements OnInit {
 
   signInOrUp(){
     if (this.nameAndEmailForm.valid){
-      if (this.loginOrNot){
+      if (this.isSignin){
         const tempLogIn = this.nameAndEmailForm.value;
         let enc = this.encryptService.encryptAES(tempLogIn['email'])
         let dec = this.encryptService.decryptAES(enc);
@@ -91,19 +89,16 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  protected activePane = signal(0);
-
-  // protected form = new FormGroup<SignUpForm>({
-  //   email: new FormControl<string>('', { nonNullable: true, validators: Validators.required })
-  // });
-
   setActiveStep() {
-    if (this.activePane() === 0 && this.nameAndEmailForm.valid) {
-      this.activePane.set(1);
-    }else if (this.activePane() === 1 ){
-      this.activePane.set(0);
-    }
-      checkNestedControlAndMarkAsDirty(this.nameAndEmailForm);
+      if (this.activePane() === 0 && this.nameAndEmailForm.valid ) {
+        this.activePane.set(1);
+        checkNestedControlAndMarkAsDirty(this.nameAndEmailForm);
+      }else if (this.activePane() === 1 ){
+        this.activePane.set(0);
+      }else if (this.activePane() === 2 && this.isSignin){
+        checkNestedControlAndMarkAsDirty(this.emailAndPasswordForm);   
+        this.router.navigateByUrl('/home');     
+      }
   }
 
   setSignUpStep(){

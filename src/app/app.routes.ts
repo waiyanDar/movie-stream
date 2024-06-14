@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import {SignalTestComponent} from "./business/uploader/signal.test/signal.test.component";
 import {TestingComponent} from "./business/uploader/testing/testing.component";
-import { LoginComponent } from './business/user/login/login.component';
+import { SignComponent } from './business/user/sign/sign.component';
+import { HomeComponent } from './business/common/home/home.component';
 
 export const routes: Routes = [
     {
@@ -14,8 +15,9 @@ export const routes: Routes = [
             
         ]
     },
-    {path: 'login', component: LoginComponent},
-    {path: 'signup', component: LoginComponent},
-    {path: "**", redirectTo: '/login'},
+    {path: 'signin', component: SignComponent},
+    {path: 'signup', component: SignComponent},
+    {path: 'home', component: HomeComponent},
+    {path: "**", redirectTo: '/home'},
 
 ];
