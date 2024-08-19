@@ -5,6 +5,7 @@ import { SignComponent } from './business/user/sign/sign.component';
 import { HomeComponent } from './business/common/home/home.component';
 import { TestComponent } from './business/user/test/test.component';
 import { authGuard } from './guards/auth.guard';
+import { ErrorComponent } from './common/widgets/error/error.component';
 
 export const routes: Routes = [
     {
@@ -21,6 +22,7 @@ export const routes: Routes = [
     {path: 'signup', component: SignComponent, canActivate: [authGuard], data: { expectedRole: 'admin'}},
     {path: 'home', component: HomeComponent},
     {path: 'test', component: TestComponent},
+    {path: 'sorry/:errorCode', component: ErrorComponent },
     {path: "**", redirectTo: '/home'},
 
 ];
