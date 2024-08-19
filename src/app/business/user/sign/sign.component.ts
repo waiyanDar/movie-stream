@@ -126,4 +126,11 @@ test = {
       checkNestedControlAndMarkAsDirty(this.passwordForm);
     }
   }
+  checkForm() {
+    if (this.emailAndPasswordForm.valid){
+      
+    }else{
+      checkNestedControlAndMarkAsDirty(this.emailAndPasswordForm);
+    }
+  }
 }

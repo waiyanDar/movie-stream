@@ -1,0 +1,22 @@
+<ng-container [formGroup]="formGp">
+    <label>
+        
+        <div class="editor">
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+            </ngx-editor-menu>
+            <ngx-editor [editor]="editor" [formControlName]="formCtrlName">
+            </ngx-editor>
+        </div>
+    </label>
+   @if(formGp.get(formCtrlName)?.touched){
+    @if (formGp.get(formCtrlName)?.hasError('required')) {
+        <span class="text-danger">Please enter {{label}}</span>
+    }
+    @if (formGp.get(formCtrlName)?.hasError('email')) {
+        <span class="text-danger">Invalid email format</span>
+    }
+    @if (formGp.get(formCtrlName)?.hasError('pswNotSame')) {
+        <span class="text-danger">Confirm password and password must same</span>
+    }
+   }
+</ng-container>

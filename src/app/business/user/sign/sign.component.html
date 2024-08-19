@@ -136,7 +136,11 @@
 <br>
 
 <div class="login">
-  <input type="text" placeholder="username" name="user"><br>
-  <input type="password" placeholder="password" name="password"><br>
-  <input type="button" value="Login">
+  <form [formGroup]="emailAndPasswordForm">
+    <app-cus-input [formGp]="emailAndPasswordForm" formCtrlName="email" label="Email" type="email" placeholder="email"
+      [showLabel]='true'></app-cus-input><br>
+    <app-cus-input [formGp]="emailAndPasswordForm" formCtrlName="password" label="Passwrod" type="password"
+      placeholder="password" [showLabel]="true"></app-cus-input><br>
+  </form>
+  <input type="button" (click)="checkForm()" value="Login">
 </div>

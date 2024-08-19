@@ -1,18 +1,12 @@
-<ng-container [formGroup]="formGp">
-    <label>
-        <span [ngClass]="{'text-danger': invalidAndTouched}" >{{label}}</span>
-        <input [type]="type" [formControlName]="formCtrlName" [placeholder]="placeholder"
-        [ngClass]="{'invalid-border': invalidAndTouched}" class="w-100"/>
-    </label>
-   @if(formGp.get(formCtrlName)?.touched){
-    @if (formGp.get(formCtrlName)?.hasError('required')) {
-        <span class="text-danger">Please enter {{label}}</span>
-    }
-    @if (formGp.get(formCtrlName)?.hasError('email')) {
-        <span class="text-danger">Invalid email format</span>
-    }
-    @if (formGp.get(formCtrlName)?.hasError('pswNotSame')) {
-        <span class="text-danger">Confirm password and password must same</span>
-    }
-   }
+<ng-container [formGroup]="formGp" >
+    <div>
+        <label>
+            @if (!showLabel) {
+                <span [ngClass]="{'text-danger': invalidAndTouched}" >{{label}}</span>
+            }
+                <input [type]="type" [formControlName]="formCtrlName" [placeholder]="placeholder" 
+                [ngClass]="{'invalid-border': invalidAndTouched}"/>
+        </label>
+    </div>
+    <app-error-messages [formGp]="formGp" [formCtrlName]="formCtrlName" [label]="label"></app-error-messages>
 </ng-container>
