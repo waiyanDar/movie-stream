@@ -3,6 +3,8 @@ import {SignalTestComponent} from "./business/uploader/signal.test/signal.test.c
 import {TestingComponent} from "./business/uploader/testing/testing.component";
 import { SignComponent } from './business/user/sign/sign.component';
 import { HomeComponent } from './business/common/home/home.component';
+import { TestComponent } from './business/user/test/test.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -16,8 +18,9 @@ export const routes: Routes = [
         ]
     },
     {path: 'signin', component: SignComponent},
-    {path: 'signup', component: SignComponent},
+    {path: 'signup', component: SignComponent, canActivate: [authGuard], data: { expectedRole: 'admin'}},
     {path: 'home', component: HomeComponent},
+    {path: 'test', component: TestComponent},
     {path: "**", redirectTo: '/home'},
 
 ];

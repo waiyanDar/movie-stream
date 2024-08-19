@@ -23,4 +23,12 @@ export class SignalTestComponent {
   reset(){
     this.testSignal.reset();
   }
+
+  testing(){
+    if (!Object.is) {
+       function ObjectIs(data1: any, data2: any) {
+        return data1 === data2
+         }
+    }
+  }
 }

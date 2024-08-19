@@ -1,4 +1,19 @@
 <app-nav></app-nav>
-<div [@routeAnimations]="prepareRoute(outlet)">
+<div [@routeAnimations]="prepareRoute(outlet)" class="test">
     <router-outlet #outlet="outlet"></router-outlet>
+</div>
+<div [ngStyle]="{'color': fontColor}" style="padding: 20px; text-align: center;">
+    <label for="color1">Select First Color:</label>
+    <select id="color1" [(ngModel)]="color1" (change)="updateGradient()">
+        <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+    </select>
+
+    <label for="color2">Select Second Color:</label>
+    <select id="color2" [(ngModel)]="color2" (change)="updateGradient()">
+        <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+    </select>
+    <label for="fontColor">Select Second Color:</label>
+    <select id="fontColor" [(ngModel)]="fontColor" (change)="updateGradient()">
+        <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+    </select>
 </div>

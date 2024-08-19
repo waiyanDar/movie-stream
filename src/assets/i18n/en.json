@@ -1,0 +1,7 @@
+{
+    "welcomeTitle": "Welcome to Our Application",
+    "welcomeMessage": "This is an example of internationalization with standalone components.",
+    "home": {
+      "pageTitle": "English"
+    }
+  }

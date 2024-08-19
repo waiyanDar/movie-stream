@@ -31,6 +31,14 @@ export class SignComponent implements OnInit {
 
   protected activePane = signal(0);
 
+test = {
+    "id": 1115,
+    "type": "Labelling",
+    "code": "LBL_US_INDICIA",
+    "description": "US citizen identification",
+    "value": "<ul class=\"custom-list\"><li>Identification as a US citizen or resident</li><li>US registered address or mailing address or post office box</li><li>US telephone number</li><li>Standing instructions to pay amounts from the account to an account maintained in the US</li><li>Current power of attorney or signatory authority granted to a person with a US address</li><li>An 'in-care-of' address or ''hold mail'' address that is the sole address the Foreign Financial Institution (FFI) has identified for your company</li></ul>"
+}
+
   constructor(
     private fb: NonNullableFormBuilder,
     private router: Router,
@@ -46,7 +54,19 @@ export class SignComponent implements OnInit {
     return this.router.url.includes('signin');
   }
 
+  chageTesting(newClassName: string) {
+    let stringContent = this.test.value;
+
+    let modifiedContent = stringContent.replace(/class="[^"]*"/g, `class="${newClassName}"`);
+
+    this.test.value = modifiedContent;
+
+    console.log('Modified test object: ', this.test);
+}
+
+
   prepareForm() {
+    this.chageTesting("testing");
     if (!this.isSignin) {
       this.nameAndEmailForm =  this.fb.group({
         email: ['', [Validators.required, Validators.email]],
