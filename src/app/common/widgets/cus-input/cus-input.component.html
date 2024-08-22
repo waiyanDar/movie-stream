@@ -1,7 +1,7 @@
 <ng-container [formGroup]="formGp" >
     <div>
         <label>
-            @if (!showLabel) {
+            @if (showLabel) {
                 <span [ngClass]="{'text-danger': invalidAndTouched}" >{{label}}</span>
             }
                 <input [type]="type" [formControlName]="formCtrlName" [placeholder]="placeholder" 

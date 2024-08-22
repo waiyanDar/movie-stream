@@ -127,7 +127,7 @@
 </div> -->
 
 <div class="body"></div>
-<div id="formDiv"></div>
+<div id="forstGlass"></div>
 
 <div class="header">
   <div>Camp<span>Out</span></div>
@@ -138,9 +138,9 @@
 <div class="login">
   <form [formGroup]="emailAndPasswordForm">
     <app-cus-input [formGp]="emailAndPasswordForm" formCtrlName="email" label="Email" type="email" placeholder="email"
-      [showLabel]='true'></app-cus-input><br>
+      [showLabel]='false'></app-cus-input><br>
     <app-cus-input [formGp]="emailAndPasswordForm" formCtrlName="password" label="Passwrod" type="password"
-      placeholder="password" [showLabel]="true"></app-cus-input><br>
+      placeholder="password" [showLabel]="false"></app-cus-input><br>
   </form>
   <input type="button" (click)="checkForm()" value="Login">
 </div>

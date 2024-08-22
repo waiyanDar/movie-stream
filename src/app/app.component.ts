@@ -9,6 +9,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from './common/store/core/states/app.state';
 import { addStyle } from './common/store/core/actions/common.actions';
 import { Style } from './common/models/style.model';
+import { DeviceDetectorService, DeviceInfo } from 'ngx-device-detector';
+import { Platform } from '@angular/cdk/platform';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +23,13 @@ import { Style } from './common/models/style.model';
 export class AppComponent implements OnInit{
   title = 'movie-store';
   counterTest = inject(counterStore);
-  constructor(private store: Store<AppState>) {}
+  deviceInfo !: DeviceInfo;
+  userDeviceData !: string;
+
+  constructor(private store: Store<AppState>, 
+              private deviceService: DeviceDetectorService,
+              private platform: Platform) {}
+
   @HostListener('window:beforeunload', ['$event'])
   beforeunloadHandler(event: Event) {
     sessionStorage.setItem('test', JSON.stringify(this.counterTest.count()));
@@ -51,6 +59,10 @@ export class AppComponent implements OnInit{
     // Initialize with default gradient
     // document.body.style.background = this.gradientBackground;
     this.addStyleToStore();
+    this.userDeviceData = navigator.userAgent;
+    this.deviceInfo = this.deviceService.getDeviceInfo();
+    console.log('device info : ', this.deviceInfo);
+    
   }
 
   addStyleToStore(){

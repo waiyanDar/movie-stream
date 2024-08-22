@@ -12,7 +12,7 @@ export const routes: Routes = [
         path: 'uploader', children : [
             {path: 'signal', component: SignalTestComponent},
             {path: 'testing', component: TestingComponent}
-        ]},
+        ], canActivate: [authGuard]},
     {
         path: 'public', children: [
             
@@ -22,7 +22,8 @@ export const routes: Routes = [
     {path: 'signup', component: SignComponent, canActivate: [authGuard], data: { expectedRole: 'admin'}},
     {path: 'home', component: HomeComponent},
     {path: 'test', component: TestComponent},
-    {path: 'sorry/:errorCode', component: ErrorComponent },
+    {path: 'sorry/:errorCode', component: ErrorComponent },//for path variable
+    {path: 'sorry', component: ErrorComponent },//for param
     {path: "**", redirectTo: '/home'},
 
 ];

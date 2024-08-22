@@ -56,3 +56,21 @@
       <span>GLASS</span>
       </div> -->
 
+
+      <form [formGroup]="fileForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="file">Upload File</label>
+          <input type="file" id="file" (change)="onFileSelect($event, 'file')" formControlName="file" />
+          <div *ngIf="fileForm.get('file')?.hasError('required')">
+            File is required.
+          </div>
+          <div *ngIf="fileForm.get('file')?.hasError('fileType')">
+            Invalid file type. Only JPEG and PNG files are allowed.
+          </div>
+          <div *ngIf="fileForm.get('file')?.hasError('fileSize')">
+            File size exceeds the maximum limit of 5MB.
+          </div>
+        </div>
+        <button type="submit" [disabled]="fileForm.invalid">Submit</button>
+      </form>
+      

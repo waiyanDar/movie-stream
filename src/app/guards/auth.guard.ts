@@ -18,7 +18,9 @@ export const authGuard: CanActivateFn = (route, state) => {
   if (tempBool){
     return true;
   }else{
-    router.navigate(['/sorry', errorCode]);
+    const url = '/sorry?code='+errorCode;
+    // router.navigate(['/sorry', errorCode]);
+    router.navigateByUrl(url);
     return false;
   }
 };

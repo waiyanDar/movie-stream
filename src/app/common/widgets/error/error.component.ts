@@ -20,7 +20,13 @@ export class ErrorComponent implements OnInit{
   }
 
   getErrorCodeAndSetBgImage(){
-    const errorCode = this.acRoute.snapshot.paramMap.get('errorCode');
+    //for getting path variable 
+    // const errorCode = this.acRoute.snapshot.paramMap.get('errorCode');
+    let errorCode : string | null = '';
+    //for getting param
+    this.acRoute.queryParamMap.subscribe(params => {
+      errorCode = params.get('code');
+    })
     switch (errorCode){
       case '401': {
         this.bgImage = this.baseImageUrl+'401.jpg';

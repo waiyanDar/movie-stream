@@ -1,0 +1,132 @@
+#forstGlass {
+    height: 200px;
+    width: 700px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-backdrop-filter: blur(1px); /* Slight blur */
+    backdrop-filter: blur(1px); /* Slight blur */
+    // box-shadow: inset 0 0 0 200px rgba(255,255,255,0.25); /* Reduced opacity for the blur effect */
+    background-color: rgba(255, 255, 255, 0.15); /* More transparent background color */
+    z-index: 1; /* Ensure it is below the header and login but above .body */
+  }
+
+  .error-background {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -40px;
+    bottom: -40px;
+    width: auto;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    z-index: 0;
+}
+.body {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -40px;
+    bottom: -40px;
+    width: auto;
+    height: auto;
+    // background-image: url(https://images4.alphacoders.com/114/1144182.jpg);
+    background-image: url(../images/loginBg.jpg);
+    // background-color: aqua;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+  
+  .header {
+    position: absolute;
+    top: calc(48% - 35px);
+    left: calc(47% - 255px);
+    z-index: 2;
+  }
+  
+  .header div {
+    float: left;
+    color: #fff;
+    font-family: 'Fredoka One';
+    font-size: 55px;
+    font-weight: 200;
+  }
+  
+  .header div span {
+    color: #542b67 !important;
+  }
+  
+  .login {
+    position: absolute;
+    top: calc(49% - 75px);
+    left: calc(50% - 50px);
+    height: 150px;
+    width: 350px;
+    padding: 10px;
+    z-index: 2;
+  }
+  
+  input {
+    width: 250px;
+    height: 30px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px 4px 2px 10px;
+  }
+  
+  input:focus {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+  }
+  
+  ::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  input.invalid-border::placeholder {
+    color: red;
+  }
+
+  input[type=button] {
+    transition: all 0.4s ease;
+    cursor: pointer;
+    border-radius: 25px;
+    font-weight: 500;
+    padding: 6px;
+    margin-top: 10px;
+  }
+  
+  input[type=button]:hover {
+    opacity: 0.8;
+    color: black;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 25px;
+  }
+  
+  input[type=button]:active {
+    opacity: 0.6;
+  }
+
+  input[type=button]:focus {
+    outline: none;
+  }
+
+  .invalid-border {
+      border: 1px solid red;
+  }
