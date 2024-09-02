@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-error-messages',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './error-messages.component.html',
   styleUrl: './error-messages.component.scss'
 })

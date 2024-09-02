@@ -27,8 +27,7 @@ export class AppComponent implements OnInit{
   userDeviceData !: string;
 
   constructor(private store: Store<AppState>, 
-              private deviceService: DeviceDetectorService,
-              private platform: Platform) {}
+              private deviceService: DeviceDetectorService) {}
 
   @HostListener('window:beforeunload', ['$event'])
   beforeunloadHandler(event: Event) {
@@ -58,7 +57,7 @@ export class AppComponent implements OnInit{
   ngOnInit() {
     // Initialize with default gradient
     // document.body.style.background = this.gradientBackground;
-    this.addStyleToStore();
+    // this.addStyleToStore();
     this.userDeviceData = navigator.userAgent;
     this.deviceInfo = this.deviceService.getDeviceInfo();
     console.log('device info : ', this.deviceInfo);

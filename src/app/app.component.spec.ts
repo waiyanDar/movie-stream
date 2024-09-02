@@ -1,12 +1,30 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { StoreModule } from '@ngrx/store';
+import { provideMockStore, MockStore } from '@ngrx/store/testing'; // For mocking the store
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorComponent } from './common/widgets/error/error.component';
+import { NavComponent } from './business/common/nav/nav.component';
 
 describe('AppComponent', () => {
+  let store: MockStore;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [AppComponent, StoreModule.forRoot({}), BrowserAnimationsModule, ErrorComponent, NavComponent],
+      providers: [provideMockStore({initialState: {}}), {
+        provide: ActivatedRoute,
+        useValue: {
+          params: of({}),  
+          queryParams: of({}), 
+        },
+      }],
     }).compileComponents();
   });
+
+  // store= TestBed.inject(MockStore);
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);

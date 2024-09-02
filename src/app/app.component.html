@@ -2,6 +2,7 @@
 <div [@routeAnimations]="prepareRoute(outlet)" class="test">
     <router-outlet #outlet="outlet"></router-outlet>
 </div>
+<h1>Hello, {{title}}</h1>
 <!-- <div [ngStyle]="{'color': fontColor}" style="padding: 20px; text-align: center;">
     <label for="color1">Select First Color:</label>
     <select id="color1" [(ngModel)]="color1" (change)="updateGradient()">

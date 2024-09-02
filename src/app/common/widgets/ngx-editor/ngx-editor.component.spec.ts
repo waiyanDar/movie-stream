@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgxEditorComponent } from './ngx-editor.component';
+import { FormControl, FormGroup } from '@angular/forms';
 
 describe('NgxEditorComponent', () => {
   let component: NgxEditorComponent;
@@ -14,6 +15,12 @@ describe('NgxEditorComponent', () => {
     
     fixture = TestBed.createComponent(NgxEditorComponent);
     component = fixture.componentInstance;
+    component.formGp = new FormGroup({
+      description: new FormControl('')
+    });
+    component.formCtrlName = 'description';
+    component.label = 'Description';
+    component.formCtrlName = 'description';
     fixture.detectChanges();
   });
 

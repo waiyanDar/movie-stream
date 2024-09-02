@@ -46,7 +46,11 @@ test = {
   ) { }
 
   ngOnInit(): void {
-    this.prepareForm();
+    // this.prepareForm();
+    this.emailAndPasswordForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    });
     this.isSignin ? this.activePane.set(2) : this.activePane.set(0);
   }
 
@@ -131,6 +135,12 @@ test = {
       
     }else{
       checkNestedControlAndMarkAsDirty(this.emailAndPasswordForm);
+    }
+  }
+
+  onSubmit() {
+    if (this.emailAndPasswordForm.valid) {
+      console.log(this.emailAndPasswordForm.value);
     }
   }
 }

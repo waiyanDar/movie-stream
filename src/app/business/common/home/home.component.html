@@ -3,6 +3,11 @@
 <br>
 <form [formGroup]="testForm">
     <app-ngx-editor [formGp]="testForm" formCtrlName="test"></app-ngx-editor>
+    <!-- <p>{{testForm.get('test1')?.value}}</p> -->
+     <input Uppercase formControlName="test1" type="text">
+    <p>{{testForm.get('test2')?.value}}</p>
+    <p>{{testForm.get('test3')?.value}}</p>
+    <button (click)="submitTesting()">Testing</button>
 </form>
 
 <iframe [src]="boundMapUrl"
