@@ -5,11 +5,12 @@ import { Store } from '@ngrx/store';
 import { TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AppState } from '../../../common/store/core/states/app.state';
 import { selectStyle } from '../../../common/store/core/selectors/common.selector';
+import {OpenCloseComponent} from "../../uploader/open-close/open-close.component";
 
 @Component({
   selector: 'app-test',
   standalone: true,
-  imports: [TranslateModule, FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [TranslateModule, FormsModule, CommonModule, ReactiveFormsModule, OpenCloseComponent],
   templateUrl: './test.component.html',
   styleUrl: './test.component.scss'
 })
@@ -33,7 +34,7 @@ export class TestComponent {
   switchLanguage(lang: string) {
     this.translate.use(lang);
   }
- 
+
   ngOnInit(): void {
     this.translate.addLangs(['en', 'fr', 'vi']);
     this.translate.setDefaultLang('en');
@@ -43,14 +44,14 @@ export class TestComponent {
 
     this.store.select(selectStyle).subscribe(style => {
       if (style){
-        this.backgroundColor = style?.backgound;   
-        this.fontColor = style.font;             
+        this.backgroundColor = style?.backgound;
+        this.fontColor = style.font;
       }
     })
   }
   colors = [
-    'cyan', 'green', 'red', 'yellow', 'blue', 'purple', 'orange', 'pink', 
-    'brown', 'grey', 'black', 'white', 'lime', 'magenta', 'navy', 'teal', 
+    'cyan', 'green', 'red', 'yellow', 'blue', 'purple', 'orange', 'pink',
+    'brown', 'grey', 'black', 'white', 'lime', 'magenta', 'navy', 'teal',
     'aqua', 'fuchsia', 'maroon', 'olive', 'silver', 'gold', 'indigo', 'violet'
   ];
   color1 = 'cyan';
@@ -61,7 +62,7 @@ export class TestComponent {
     this.gradientBackground = `linear-gradient(45deg, ${this.color1}, ${this.color2})`;
   }
 
-  
+
 
   fileTypeValidator(allowedTypes: string[]) {
     return (control: AbstractControl) => {
@@ -69,7 +70,7 @@ export class TestComponent {
       const file = control.value;
       if (file) {
         console.log('file.type:', file.type);
-        
+
         const fileType = file.type;
         if (allowedTypes.indexOf(fileType) === -1) {
           return { fileType: true };
@@ -78,7 +79,7 @@ export class TestComponent {
       return null;
     };
   }
-  
+
 
   fileSizeValidator(maxSize: number) {
     return (control: any) => {
@@ -96,8 +97,8 @@ export class TestComponent {
   onFileSelect(event: any, control: any) {
     const allowedTypes = ['image/jpeg', 'image/png'];
     const file = event.target.files[0];
-    if (file) {        
-        const fileType = file.type;        
+    if (file) {
+        const fileType = file.type;
         if (allowedTypes.indexOf(fileType) === -1) {
           this.fileForm.get(control)?.setErrors({'fileType': true})
         }else{

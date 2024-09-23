@@ -12,6 +12,7 @@ import {CounterSignalStoreEffect} from "./common/store/signal/effects/CounterSig
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 
 export class CustomTranslateLoader implements TranslateLoader {
     constructor(private http: HttpClient) {}
@@ -51,9 +52,13 @@ export const appConfig: ApplicationConfig = {
         }),
         provideEffects([CounterSignalStoreEffect]),
         provideHttpClient(),
+        importProvidersFrom(
+          BackButtonDisableModule.forRoot({
+            preserveScroll: true
+            })
+        )
     ]
 };
-
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
 }

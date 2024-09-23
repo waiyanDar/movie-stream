@@ -5,11 +5,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Validators } from 'ngx-editor';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Uppercase } from '../todo';
+import { SignalTestComponent } from '../signal-test/signal-test.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, NgxEditorComponent, ReactiveFormsModule, Uppercase],
+  imports: [RouterLink, NgxEditorComponent, ReactiveFormsModule, Uppercase, SignalTestComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

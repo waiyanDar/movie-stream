@@ -1,5 +1,17 @@
 // src/app/shared/animations.ts
-import { animate, animation, group, keyframes, query, state, style, transition, trigger, useAnimation } from '@angular/animations';
+import {
+  animate,
+  animation,
+  group,
+  keyframes,
+  query,
+  stagger,
+  state,
+  style,
+  transition,
+  trigger,
+  useAnimation
+} from '@angular/animations';
 
 export const fadeAnimation = animation([
   style({ opacity: 0 }),
@@ -155,3 +167,80 @@ export const routeAnimations = trigger('routeAnimations', [
     ])
   ])
 ])
+
+export const slideInOut = trigger('slideInOut', [
+  transition(':enter', [
+    style({
+      transform: 'translateX(-100%)'
+    }),
+    animate('400ms ease-in', style({transform: 'translateX(0)'}))
+  ]),
+  transition(':leave', [
+    animate('400ms ease-in', style({transform: 'translateX(-100%)'}))
+  ])
+])
+
+export const openClose = trigger('openClose', [
+    state(
+      'open',
+      style({
+        height: '200px',
+        opacity: 1,
+        backgroundColor: 'yellow',
+      }),
+    ),
+    state(
+      'closed',
+      style({
+        height: '100px',
+        opacity: 0.8,
+        backgroundColor: 'blue',
+      }),
+    ),
+    transition('open => closed', [animate('1s')]),
+    transition('closed => open', [animate('0.5s')]),
+  ])
+
+export const fadeInOut =
+  trigger('fadeInOut', [
+    state('visible', style({
+      opacity: 1
+    })),
+    state('hidden', style({
+      opacity: 0
+    })),
+    transition('visible <=> hidden', [
+      animate('500ms ease-in-out')
+    ])
+  ])
+export  const myInsertRemoveTrigger = trigger('myInsertRemoveTrigger', [
+  transition(':enter', [style({opacity: 0}), animate('1000ms', style({opacity: 1}))]),
+  transition(':leave', [animate('1000ms', style({opacity: 0}))])
+])
+
+export  const pageAnimation = trigger('pageAnimations', [
+  transition(':enter', [
+    query('.hero', [
+      style({opacity: 0, transform: 'translateY(-100px)'}),
+      stagger(30, [
+        animate('500ms cubic-bezier(0.35, 0, 0.25, 1)', style({opacity: 1, transform: 'none'})),
+      ]),
+    ]),
+  ]),
+])
+export const filterAnimation = trigger('filterAnimation', [
+    transition(':enter, * => 0, * => -1', []),
+    transition(':increment', [
+      query(
+        ':enter',
+        [
+          style({opacity: 0, width: 0}),
+          stagger(50, [animate('300ms ease-out', style({opacity: 1, width: '*'}))]),
+        ],
+        {optional: true},
+      ),
+    ]),
+    transition(':decrement', [
+      query(':leave', [stagger(50, [animate('300ms ease-out', style({opacity: 0, width: 0}))])]),
+    ]),
+  ])

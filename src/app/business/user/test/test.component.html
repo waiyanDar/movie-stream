@@ -10,7 +10,7 @@
 <p>{{ 'welcomeMessage' | translate }}</p>
 <button (click)="switchLanguage('en')">English</button>
 <button (click)="switchLanguage('fr')">French</button> -->
-<!-- 
+<!--
 <div class="wrap">
     <div class="box1">Box One</div>
     <div class="box2">Box two</div>
@@ -37,9 +37,9 @@
     <div class="row">
         <div class="col">
             <form class="form-floating mt-3" #form="ngForm">
-                <input type="email" class="form-control" 
-                  [ngClass]="{'is-invalid': floatingInputValue.invalid && floatingInputValue.touched}" 
-                  id="floatingInputValue" placeholder="name@example.com" [ngStyle]="{'background': backgroundColor}" 
+                <input type="email" class="form-control"
+                  [ngClass]="{'is-invalid': floatingInputValue.invalid && floatingInputValue.touched}"
+                  id="floatingInputValue" placeholder="name@example.com" [ngStyle]="{'background': backgroundColor}"
                   ngModel  name="email" #floatingInputValue="ngModel"  required>
                 <label [ngClass]="{'text-danger-cus': floatingInputValue.invalid && floatingInputValue.touched}" [ngStyle]="{'color': fontColor}" for="floatingInputValue">Input with value</label>
                 <div *ngIf="floatingInputValue.invalid && floatingInputValue.touched" class="invalid-feedback">
@@ -73,4 +73,5 @@
         </div>
         <button type="submit" [disabled]="fileForm.invalid">Submit</button>
       </form>
-      
+
+<app-open-close></app-open-close>

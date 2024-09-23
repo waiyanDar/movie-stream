@@ -3,7 +3,30 @@ html, body {
     margin: 0;
     font-family: Arial, sans-serif;
   }
-  
+
 .test{
   margin-top: 50px;
+}
+
+/* app.component.css */
+.box {
+  width: 200px;
+  height: 200px;
+  background-color: lightblue;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+.box-container {
+  height: 200px;
+  overflow: hidden;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
 }
